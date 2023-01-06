@@ -25,9 +25,9 @@ const io = socket(server, {
  * Connection to the database
  */
 mongoose
-  .connect(process.env.DATABASE_STRING, {
+  .connect("mongodb://127.0.0.1:27017/ser_ver", {
     useCreateIndex: true,
-    useFindAndModify: true,
+    useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

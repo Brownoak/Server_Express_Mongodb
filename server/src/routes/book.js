@@ -5,39 +5,34 @@ const { verifyUser } = require("../middelware/auth");
 
 const router = express.Router();
 
-/**
- * Routes for handling
- *  - Get All Books
- *  - Create Book
- */
+
 router
   .route("/")
-  .get(verifyUser, bookController.getAllBooks)
+  .get(
+   
+    bookController.getAllBooks)
   .post(
-    verifyUser,
-    bookController.uploadImage,
+  
     bookValidation.validate("CREATE"),
     bookController.createBook
   );
 
-/**
- * Routes for handling
- *  - Get Single Book
- *  - Update Book
- *  - Delete Book
- */
+
 router
   .route("/:id")
-  .get(verifyUser, bookValidation.validate("GET"), bookController.getBook)
+  .get(
+  
+    bookValidation.validate("GET"), 
+    bookController.getBook)
   .patch(
-    verifyUser,
+    
     bookValidation.validate("UPDATE"),
     bookController.updateBook
   )
   .delete(
-    verifyUser,
+    
     bookValidation.validate("DELETE"),
-    bookController.deleteBook
-  );
+    bookController.deleteBook 
+  );   
 
 module.exports = router;

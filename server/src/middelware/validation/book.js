@@ -42,13 +42,13 @@ exports.validate = (type) => {
           .isEmpty()
           .withMessage("Book description is required"),
       ];
-    case "DELETE":
-      return [
-        param("id")
-          .custom((value) => {
-            return mongoose.Types.ObjectId.isValid(value);
-          })
-          .withMessage("Invalid book ID"),
+    case "DELETE":  
+          return [
+            param("id")
+              .not()
+              .isEmpty() 
+              .withMessage("Invalid user ID"),
+          
       ];
 
     default:

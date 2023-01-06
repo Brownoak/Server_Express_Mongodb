@@ -5,12 +5,6 @@ const { verifyUser } = require("../middelware/auth");
 
 const router = express.Router();
 
-/**
- * Routes for handling
- *  - User login
- *  - User sign up
- *  - User search
- */
 
 router.post("/login", userValidation.validate("LOGIN"), userController.login);
 
@@ -20,6 +14,10 @@ router.post(
   userController.signup
 );
 
-router.get("/search", verifyUser, userController.serachUser);
+router.get("/search", 
+//verifyUser, 
+userController.serachUser);
+router.delete("/delete/(:id)", userValidation.validate("DELETE"), userController.deleteUser )
+router.patch("/:id", userValidation.validate("UPDATE"),userController.update);
 
 module.exports = router;

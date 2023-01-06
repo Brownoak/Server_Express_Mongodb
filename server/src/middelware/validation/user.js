@@ -1,4 +1,5 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
+const ObjectId = require('mongoose').Types.ObjectId;
 
 /**
  *
@@ -8,6 +9,7 @@ const { body } = require("express-validator");
 exports.validate = (type) => {
   switch (type) {
     case "LOGIN":
+
       return [
         body("email").isEmail().withMessage("Invalid email address"),
         body("password").not().isEmpty().withMessage("Password is required"),
@@ -18,6 +20,37 @@ exports.validate = (type) => {
         body("lastName").not().isEmpty().withMessage("Last Name is required"),
         body("email").isEmail().withMessage("Invalid email address"),
         body("password").not().isEmpty().withMessage("Password is required"),
+      ];
+
+      case "UPDATE":
+      return [ param("id")
+      .not()
+      .isEmpty() 
+      .withMessage("Invalid user ID"),
+
+    body("firstName")
+      .not()
+      .isEmpty()
+      .withMessage("first name can not be empty"),
+    body("lastName")
+      .not()
+      .isEmpty()
+      .withMessage("Last name can not be empty"),
+    body("email")
+      .isEmail()
+      .withMessage("Invalid email"),
+    body("password")
+      .not()
+      .isEmpty()
+      .withMessage("password required"),
+      ];
+
+      case "DELETE":
+      return [
+        param("id")
+          .not()
+          .isEmpty() 
+          .withMessage("Invalid user ID"),
       ];
     default:
       return [];

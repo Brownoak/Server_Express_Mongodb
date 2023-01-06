@@ -1,14 +1,6 @@
 const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate");
-/**
- * Schema for storing book
- *  * Name - book name
- *  * Description - book description
- *  * Image - book cover photo
- *  * Author - book author/creator
- *  * Authors - book contributors
- *  * Content - book content
- */
+
 const schema = new mongoose.Schema(
   {
     name: {
