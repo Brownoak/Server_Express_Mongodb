@@ -8,6 +8,7 @@ const { validationResult } = require("express-validator");
  * @returns
  */
 const getToken = (id) => {
+  console.log(id)
   return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
@@ -23,7 +24,7 @@ exports.login = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(400).json({
+     return res.status(400).json({
         status: "error",
         message: errors.array()[0].msg,
       });
@@ -36,15 +37,17 @@ exports.login = async (req, res, next) => {
       !user ||
       !(await user.verifyPassword(req.body.password, user.password)) //(candidate and userpwd)
     ) {
-      res.status(401).json({
+     return res.status(401).json({
         status: "error",
         message: "Invalid email or password",
       });
     }
 
+    const token = getToken(user.id)
+
     res.status(201).json({
       status: "success",
-      //token,
+       token,
       user,
     });
   } catch (err) {

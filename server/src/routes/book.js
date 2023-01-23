@@ -9,10 +9,10 @@ const router = express.Router();
 router
   .route("/")
   .get(
-   
+    verifyUser,
     bookController.getAllBooks)
   .post(
-  
+    
     bookValidation.validate("CREATE"),
     bookController.createBook
   );
@@ -21,7 +21,7 @@ router
 router
   .route("/:id")
   .get(
-  
+    verifyUser,
     bookValidation.validate("GET"), 
     bookController.getBook)
   .patch(

@@ -16,6 +16,8 @@ exports.getAllBooks = async (req, res, next) => {
         message: errors.array()[0].msg,
       });
     }
+    console.log(req.user)
+
     const page =  1;
     const limit = 10;
     const result = await Book.paginate(
@@ -54,6 +56,7 @@ exports.getBook = async (req, res, next) => {
         message: errors.array()[0].msg,
       });
     }
+    console.log(req.user)
     const book = await Book.findById(req.params.id)
     if (!book) {
       res.status(404).json({

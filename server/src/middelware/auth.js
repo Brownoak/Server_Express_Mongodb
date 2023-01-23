@@ -23,9 +23,9 @@ exports.verifyUser = async (req, res, next) => {
         message: "You are not logged in",
       });
     }
-
+//verify= verifies the expiredate of the token in .env
     const { id } = await promisify(jwt.verify)(
-      //token,
+      token,
       process.env.JWT_SECRET_KEY
     );
     const user = await User.findById(id);
